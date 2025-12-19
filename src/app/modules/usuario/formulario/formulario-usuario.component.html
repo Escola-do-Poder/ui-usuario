@@ -1,0 +1,38 @@
+<div class="w-full p-16">
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="space-y-6 border rounded-md p-4">
+    <z-form-field>
+      <label z-form-label zRequired>Nome</label>
+      <z-form-control>
+        @let nomeControl = formulario.get('nome');
+        <input z-input type="text" placeholder="Digite seu nome" formControlName="nome"
+               [zStatus]="nomeControl?.invalid && nomeControl?.touched ? 'error' : undefined"/>
+
+        @if (nomeControl?.touched) {
+          @if (nomeControl?.hasError('required')) {
+            <z-form-message zType="error">Campo obrigatório.</z-form-message>
+          }
+
+          @if (nomeControl?.hasError('pattern')) {
+            <z-form-message zType="error">Apenas letras são permitidas.</z-form-message>
+          }
+        }
+      </z-form-control>
+    </z-form-field>
+
+    <z-form-field>
+      <label z-form-label zRequired>CPF</label>
+      <z-form-control>
+        <input z-input type="text" placeholder="Digite seu CPF" formControlName="cpf"/>
+      </z-form-control>
+    </z-form-field>
+
+    <z-form-field>
+      <label z-form-label zRequired>RG</label>
+      <z-form-control>
+        <input z-input type="text" placeholder="Digite seu RG" formControlName="rg"/>
+      </z-form-control>
+    </z-form-field>
+
+    <button z-button zType="default" zFull type="submit" [disabled]="formulario.invalid">Salvar</button>
+  </form>
+</div>

@@ -18,6 +18,9 @@
     "paths": {
       "@shared/*": [
         "src/app/shared/*"
+      ],
+      "@zard-ui/*": [
+        "src/app/shared/zard-ui/*"
       ]
     }
   },

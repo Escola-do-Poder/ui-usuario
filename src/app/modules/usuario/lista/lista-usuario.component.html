@@ -1,0 +1,57 @@
+<div class="w-full p-16">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-2xl font-bold"> Usuários </h1>
+
+    <a z-button zType="default" [routerLink]="['/usuario/novo']">
+      <div z-icon zType="user-plus" zSize="xl"></div>
+      Novo usuário
+    </a>
+  </div>
+
+  <div class="overflow-hidden rounded-md border">
+    <table z-table>
+      <thead z-table-header>
+      <tr z-table-row>
+        <th z-table-head>Nome</th>
+        <th z-table-head>CPF</th>
+        <th z-table-head>RG</th>
+        <th z-table-head class="w-16">Ações</th>
+      </tr>
+      </thead>
+      <tbody z-table-body>
+        @for (usuario of usuarios; track usuario.id) {
+          <tr z-table-row>
+            <td z-table-cell>
+              <div>{{ usuario.nome }}</div>
+            </td>
+            <td z-table-cell>
+              <div>{{ usuario.cpf | cpf }}</div>
+            </td>
+            <td z-table-cell>
+              <div>{{ usuario.rg }}</div>
+            </td>
+            <td z-table-cell>
+              <div class="flex items-center gap-2">
+                <z-button zType="ghost" (click)="'()'" title="Detalhar usuário"
+                          zTooltip="Detalhar usuário">
+                  <div z-icon zType="user-search" zSize="xl"></div>
+                </z-button>
+                <z-button zType="ghost" (click)="'()'" title="Editar usuário" zTooltip="Editar usuário">
+                  <div z-icon zType="user-pen" zSize="xl"></div>
+                </z-button>
+                <z-button zType="ghost" class="text-destructive" (click)="'()'" title="Deletar usuário"
+                          zTooltip="Deletar usuário">
+                  <div z-icon zType="trash" zSize="xl"></div>
+                </z-button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr z-table-row>
+            <td z-table-cell [attr.colspan]="4" class="h-24 text-center">No results.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
