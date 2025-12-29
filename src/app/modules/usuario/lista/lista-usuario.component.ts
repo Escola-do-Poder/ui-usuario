@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import {
   ZardTableBodyComponent,
   ZardTableCellComponent,
@@ -13,6 +13,9 @@ import { ZardTooltipModule } from '@zard-ui/components/tooltip/tooltip';
 import { CpfPipe } from '@shared/pipes/cpf.pipe';
 import { Usuario } from '../models/usuario';
 import { RouterLink } from '@angular/router';
+import { UsuarioService } from '../services/usuario.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-lista-usuario',
@@ -31,12 +34,30 @@ import { RouterLink } from '@angular/router';
   ],
   templateUrl: './lista-usuario.component.html',
   styleUrl: './lista-usuario.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListaUsuario {
-  public usuarios: Usuario[] = [
-    { id: '1', nome: 'Ana Paula Souza', cpf: '12345678900', rg: 12345678 },
-    { id: '2', nome: 'Bruno Henrique Lima', cpf: '98765432100', rg: 87654321 },
-    { id: '3', nome: 'Carla Mendes Oliveira', cpf: '11122233344', rg: 11223344 },
-    { id: '4', nome: 'Diego Santos Ferreira', cpf: '55566677788', rg: 55667788 },
-  ];
+export class ListaUsuario implements OnInit {
+  public usuarios = signal<Usuario[]>([]);
+
+  private _usuarioService = inject(UsuarioService);
+
+  public ngOnInit(): void {
+    this._usuarioService.listarUsuarios().subscribe({
+      next: (usuarios) => this.usuarios.set(usuarios ?? []),
+      error: (err: HttpErrorResponse) => toast.error(
+        'Ocorreu um problema!', {
+          description: err.error.message,
+        }),
+    });
+  }
+
+  public excluirUsuario(id: number): void {
+    this._usuarioService.deletarUsuario(id).subscribe({
+      complete: () => {
+        toast.success('Usuário deletado com sucesso!');
+
+        this.usuarios.update((usuarios) => usuarios.filter((usuario) => usuario.id !== id));
+      },
+    });
+  }
 }

@@ -1,9 +1,21 @@
 import { Routes } from '@angular/router';
-import { ListaUsuario } from './modules/usuario/lista/lista-usuario.component';
-import { FormularioUsuario } from './modules/usuario/formulario/formulario-usuario.component';
 
 export const routes: Routes = [
-  { path: '', component: ListaUsuario },
-  { path: 'usuario/novo', component: FormularioUsuario },
+  {
+    path: '',
+    loadComponent: () => import('./modules/usuario/lista/lista-usuario.component').then(c => c.ListaUsuario),
+  },
+  {
+    path: 'usuario/novo',
+    loadComponent: () => import('./modules/usuario/cadastrar/cadastrar-usuario.component').then(c => c.CadastrarUsuario),
+  },
+  {
+    path: 'usuario/:id',
+    loadComponent: () => import('./modules/usuario/detalhar/detalhar-usuario.component').then(c => c.DetalharUsuario),
+  },
+  {
+    path: 'usuario/:id/editar',
+    loadComponent: () => import('./modules/usuario/editar/editar-usuario.component').then(c => c.EditarUsuario),
+  },
   { path: '**', redirectTo: '' },
 ];

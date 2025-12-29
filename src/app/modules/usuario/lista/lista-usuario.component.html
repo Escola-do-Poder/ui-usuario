@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center mb-8">
     <h1 class="text-2xl font-bold"> Usuários </h1>
 
-    <a z-button zType="default" [routerLink]="['/usuario/novo']">
+    <a z-button zType="default" [routerLink]="'/usuario/novo'">
       <div z-icon zType="user-plus" zSize="xl"></div>
       Novo usuário
     </a>
@@ -19,7 +19,7 @@
       </tr>
       </thead>
       <tbody z-table-body>
-        @for (usuario of usuarios; track usuario.id) {
+        @for (usuario of usuarios(); track usuario.id) {
           <tr z-table-row>
             <td z-table-cell>
               <div>{{ usuario.nome }}</div>
@@ -32,17 +32,19 @@
             </td>
             <td z-table-cell>
               <div class="flex items-center gap-2">
-                <z-button zType="ghost" (click)="'()'" title="Detalhar usuário"
-                          zTooltip="Detalhar usuário">
+                <a z-button zType="ghost" [routerLink]="'usuario/' + usuario.id" title="Detalhar usuário"
+                   zTooltip="Detalhar usuário">
                   <div z-icon zType="user-search" zSize="xl"></div>
-                </z-button>
-                <z-button zType="ghost" (click)="'()'" title="Editar usuário" zTooltip="Editar usuário">
+                </a>
+                <a z-button zType="ghost" [routerLink]="'usuario/' + usuario.id + '/editar'" title="Editar usuário"
+                   zTooltip="Editar usuário">
                   <div z-icon zType="user-pen" zSize="xl"></div>
-                </z-button>
-                <z-button zType="ghost" class="text-destructive" (click)="'()'" title="Deletar usuário"
-                          zTooltip="Deletar usuário">
+                </a>
+                <a z-button zType="ghost" class="text-destructive" (click)="excluirUsuario(usuario.id)"
+                   title="Deletar usuário"
+                   zTooltip="Deletar usuário">
                   <div z-icon zType="trash" zSize="xl"></div>
-                </z-button>
+                </a>
               </div>
             </td>
           </tr>
