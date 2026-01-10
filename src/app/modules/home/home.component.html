@@ -1,0 +1,16 @@
+<div class="w-full flex flex-col mx-auto h-full gap-48 p-8">
+  <div>
+    <h1 class="text-4xl font-bold">Sistema de Atendimento Agendado</h1>
+
+
+  </div>
+
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    @for (card of cardsNavegacao; track card.id) {
+      <app-card-navegacao
+        [rotaNavegacao]="card.rotaNavegacao"
+        [tituloCard]="card.tituloCard"
+        [descricaoCard]="card.descricaoCard"/>
+    }
+  </div>
+</div>
