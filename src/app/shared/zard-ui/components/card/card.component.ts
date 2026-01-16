@@ -10,9 +10,9 @@ import {
 
 import type { ClassValue } from 'clsx';
 
-import { ZardButtonComponent } from '@shared/zard-ui/components/button/button.component';
-import { ZardStringTemplateOutletDirective } from '@shared/zard-ui/core/directives/string-template-outlet/string-template-outlet.directive';
-import { generateId, mergeClasses } from '@shared/zard-ui/utils/merge-classes';
+import { ZardButtonComponent } from '@zard-ui/components/button/button.component';
+import { ZardStringTemplateOutletDirective } from '@zard-ui/core/directives/string-template-outlet/string-template-outlet.directive';
+import { generateId, mergeClasses } from '@zard-ui/utils/merge-classes';
 
 import { cardBodyVariants, cardFooterVariants, cardHeaderVariants, cardVariants } from './card.variants';
 
