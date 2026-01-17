@@ -7,7 +7,7 @@ import {
   Directive,
   ElementRef,
   inject,
-  Injector,
+  Injector, Input,
   input,
   NgModule,
   numberAttribute,
