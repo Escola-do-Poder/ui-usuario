@@ -34,7 +34,7 @@ export class CadastrarUsuario {
       complete: () => {
         this.carregando = false;
         toast.success('Usuário salvo com sucesso!');
-        this._router.navigate(['/']);
+        this._router.navigate(['/usuarios']);
       },
     });
   }
