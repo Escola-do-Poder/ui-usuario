@@ -9,6 +9,7 @@
   "aliases": {
     "core": "src/app/shared/zard-ui/core",
     "components": "src/app/shared/zard-ui/components",
-    "utils": "src/app/shared/zard-ui/utils"
+    "utils": "src/app/shared/zard-ui/utils",
+    "services": "src/app/shared/zard-ui/services"
   }
 }
