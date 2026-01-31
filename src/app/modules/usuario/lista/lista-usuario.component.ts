@@ -14,8 +14,9 @@ import { CpfPipe } from '@shared/pipes/cpf.pipe';
 import { Usuario } from '../models/usuario';
 import { RouterLink } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { toast } from 'ngx-sonner';
+import { HttpLoadingService } from '../../../core/http/http-loading.service';
+import { ZardSkeletonComponent } from '@zard-ui/components/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-lista-usuario',
@@ -31,6 +32,7 @@ import { toast } from 'ngx-sonner';
     ZardTooltipModule,
     CpfPipe,
     RouterLink,
+    ZardSkeletonComponent,
   ],
   templateUrl: './lista-usuario.component.html',
   styleUrl: './lista-usuario.component.css',
@@ -38,16 +40,15 @@ import { toast } from 'ngx-sonner';
 })
 export class ListaUsuario implements OnInit {
   public usuarios = signal<Usuario[]>([]);
+  public quantidadeSkeletons: number[] = Array.from({ length: 4 });
+
+  protected httpLoadingService = inject(HttpLoadingService);
 
   private _usuarioService = inject(UsuarioService);
 
   public ngOnInit(): void {
     this._usuarioService.listarUsuarios().subscribe({
       next: (usuarios) => this.usuarios.set(usuarios ?? []),
-      error: (err: HttpErrorResponse) => toast.error(
-        'Ocorreu um problema!', {
-          description: err.error.message,
-        }),
     });
   }
 

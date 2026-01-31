@@ -18,7 +18,7 @@
         <th z-table-head class="w-16">Ações</th>
       </tr>
       </thead>
-      <tbody z-table-body>
+      <tbody z-table-body [class]="httpLoadingService.loading() ? 'mask-b-from-50%' : ''">
         @for (usuario of usuarios(); track usuario.id) {
           <tr z-table-row>
             <td z-table-cell>
@@ -49,9 +49,37 @@
             </td>
           </tr>
         } @empty {
-          <tr z-table-row>
-            <td z-table-cell [attr.colspan]="4" class="h-24 text-center">No results.</td>
-          </tr>
+          @if (httpLoadingService.loading()) {
+            @for (_ of quantidadeSkeletons; track $index) {
+              <tr z-table-row>
+                <td z-table-cell>
+                  <z-skeleton class="w-40 h-5"/>
+                </td>
+
+                <td z-table-cell>
+                  <z-skeleton class="w-30 h-5"/>
+                </td>
+
+                <td z-table-cell>
+                  <z-skeleton class="w-20 h-5"/>
+                </td>
+
+                <td z-table-cell>
+                  <div class="flex items-center gap-2">
+                    <z-skeleton class="size-8 rounded-full"/>
+                    <z-skeleton class="size-8 rounded-full"/>
+                    <z-skeleton class="size-8 rounded-full"/>
+                  </div>
+                </td>
+              </tr>
+            }
+          } @else {
+            <tr z-table-row>
+              <td z-table-cell [attr.colspan]="4" class="h-24 text-center">
+                Sem resultados.
+              </td>
+            </tr>
+          }
         }
       </tbody>
     </table>
