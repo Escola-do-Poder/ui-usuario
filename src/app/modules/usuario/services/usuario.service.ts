@@ -9,6 +9,11 @@ import { FormGroup } from '@angular/forms';
 })
 export class UsuarioService {
   // private _urlEndpoint = 'https://sabulous-nellie-matronal.ngrok-free.dev/usuarios';
+//   this._http.post(url, body, {
+//     context: new HttpContext()
+// .set(HTTP_ERROR_MESSAGE, 'Mensagem personalizada para este fluxo')
+//   .set(HTTP_ERROR_TOAST, false) // desliga o toast global se quiser tratar localmente
+// });
   private _urlEndpoint = 'http://localhost:3000/usuarios';
 
   private _http = inject(HttpClient);
