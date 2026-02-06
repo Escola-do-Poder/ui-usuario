@@ -64,8 +64,8 @@ export const Navegacao: GrupoNavegacao[] = [
       {
         id: generateId('item-navegacao'),
         icone: 'users',
-        rota: '/usuarios',
-        titulo: 'Usuários',
+        rota: '/usuarios-perfis',
+        titulo: 'Usuários e Perfis',
       },
       {
         id: generateId('item-navegacao'),

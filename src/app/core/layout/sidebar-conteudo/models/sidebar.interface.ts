@@ -11,5 +11,7 @@ export interface ItemNavegacao {
   icone: ZardIcon;
   titulo: string;
   rota?: string;
-  submenus?: Omit<ItemNavegacao, 'icone' | 'submenus'>[];
+  submenus?: SubmenuItemNavegacao[];
 }
+
+export type SubmenuItemNavegacao = Omit<ItemNavegacao, 'icone' | 'submenus'>;

@@ -11,7 +11,7 @@ export const routes: Routes = [
     loadComponent: () => import('./core/layout/sidebar-conteudo/sidebar-conteudo.component').then(c => c.SidebarConteudoComponent),
     children: [
       {
-        path: 'usuarios',
+        path: 'usuarios-perfis',
         loadChildren: () => import('./modules/usuario/usuario.routes').then(r => r.usuarioRoutes),
       },
 

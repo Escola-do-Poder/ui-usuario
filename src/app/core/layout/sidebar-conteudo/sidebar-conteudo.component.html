@@ -17,48 +17,50 @@
           }
           @for (itemNavegacao of grupoNavegacao.itensNavegacao; track itemNavegacao.id) {
             @if (itemNavegacao.submenus) {
-              <button
-                type="button"
+              <a
                 z-button
                 zType="ghost"
                 z-menu
                 [zMenuTriggerFor]="submenu"
                 zPlacement="rightTop"
-                [class]="sidebarCollapsed() ? 'justify-center' : 'justify-start'"
+                [class]="obterClasseItemBotao(itemNavegacao)"
                 [zTooltip]="sidebarCollapsed() ? itemNavegacao.titulo : null"
                 zPosition="right"
-              >
+                [attr.aria-current]="isItemAtivo(itemNavegacao) ? 'page' : null">
                 <z-icon [zType]="itemNavegacao.icone" [zSize]="'xl'" [class]="sidebarCollapsed() ? '' : 'mr-2'"/>
                 @if (!sidebarCollapsed()) {
                   <span class="flex-1 text-left">{{ itemNavegacao.titulo }}</span>
                   <z-icon zType="chevron-right"/>
                 }
-              </button>
+              </a>
 
               <ng-template #submenu>
                 <div z-menu-content class="w-48">
                   @for (submenu of itemNavegacao.submenus; track submenu.id) {
-                    <button z-menu-item type="button" [routerLink]="submenu.rota">
+                    <a
+                      z-menu-item
+                      [routerLink]="submenu.rota"
+                      [class]="obterClasseSubmenuItem(submenu.rota)"
+                      [attr.aria-current]="isRotaAtiva(submenu.rota) ? 'page' : null">
                       {{ submenu.titulo }}
-                    </button>
+                    </a>
                   }
                 </div>
               </ng-template>
             } @else {
-              <button
-                type="button"
+              <a
                 z-button
                 zType="ghost"
-                [class]="sidebarCollapsed() ? 'justify-center' : 'justify-start'"
+                [class]="obterClasseLinkBotao(itemNavegacao.rota)"
                 [zTooltip]="sidebarCollapsed() ? itemNavegacao.titulo : ''"
                 zPosition="right"
                 [routerLink]="itemNavegacao.rota"
-              >
+                [attr.aria-current]="isRotaAtiva(itemNavegacao.rota) ? 'page' : null"              >
                 <z-icon [zType]="itemNavegacao.icone" [zSize]="'xl'" [class]="sidebarCollapsed() ? '' : 'mr-2'"/>
                 @if (!sidebarCollapsed()) {
                   <span>{{ itemNavegacao.titulo }}</span>
                 }
-              </button>
+              </a>
             }
           }
         </z-sidebar-group>
