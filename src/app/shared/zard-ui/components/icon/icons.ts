@@ -1,6 +1,5 @@
 import {
-  Airplay,
-  AlignVerticalJustifyStart,
+  Activity, Airplay, AlignVerticalJustifyStart,
   Archive,
   ArrowLeft,
   ArrowRight,
@@ -31,6 +30,8 @@ import {
   Code,
   CodeXml,
   Copy,
+  CreditCard,
+  DollarSign,
   Ellipsis,
   Eye,
   File,
@@ -69,6 +70,7 @@ import {
   Shield,
   Smartphone,
   Sparkles,
+  Square,
   SquareLibrary,
   Star,
   Sun,
@@ -82,11 +84,9 @@ import {
   Trash2,
   TriangleAlert, TvMinimal,
   Underline,
-  User,
-  UserPen,
+  User, UserPen,
   UserPlus,
-  Users,
-  UserSearch,
+  Users, UserSearch,
   X,
   Zap,
 } from 'lucide-angular';
@@ -185,7 +185,11 @@ export const ZARD_ICONS = {
   tag: Tag,
   'sun-moon': SunMoon,
   'dark-mode': DarkMode,
+  square: Square,
+  'dollar-sign': DollarSign,
   'user-plus': UserPlus,
+  'credit-card': CreditCard,
+  activity: Activity,
   'user-pen': UserPen,
   'user-search': UserSearch,
   'between-vertical-end': BetweenVerticalEnd,
@@ -195,7 +199,7 @@ export const ZARD_ICONS = {
   'align-vertical-justify-start': AlignVerticalJustifyStart,
   'chart-column': ChartColumn,
   'tv-minimal': TvMinimal,
-  airplay: Airplay
+  airplay: Airplay,
 } as const satisfies Record<string, LucideIconData>;
 
 export declare type ZardIcon = keyof typeof ZARD_ICONS | LucideIconData;
