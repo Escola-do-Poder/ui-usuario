@@ -106,7 +106,7 @@ export class ZardPaginationButtonComponent {
     >
       <span class="sr-only">To previous page</span>
       <z-icon zType="chevron-left" aria-hidden="true" />
-      <span class="hidden sm:block" aria-hidden="true">Previous</span>
+      <span class="hidden sm:block" aria-hidden="true">{{ zPreviousButtonText() ?? 'Previous' }}</span>
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -117,6 +117,7 @@ export class ZardPaginationPreviousComponent {
   readonly class = input<ClassValue>('');
   readonly zDisabled = input(false, { transform: booleanAttribute });
   readonly zSize = input<ZardButtonSizeVariants>('default');
+  readonly zPreviousButtonText = input<string | undefined>();
 
   protected readonly classes = computed(() => mergeClasses(paginationPreviousVariants(), this.class()));
 }
@@ -134,7 +135,7 @@ export class ZardPaginationPreviousComponent {
       [zSize]="zSize()"
     >
       <span class="sr-only">To next page</span>
-      <span class="hidden sm:block" aria-hidden="true">Next</span>
+      <span class="hidden sm:block" aria-hidden="true">{{ zNextButtonText() ?? 'Next' }}</span>
       <z-icon zType="chevron-right" aria-hidden="true" />
     </button>
   `,
@@ -146,6 +147,7 @@ export class ZardPaginationNextComponent {
   readonly class = input<ClassValue>('');
   readonly zDisabled = input(false, { transform: booleanAttribute });
   readonly zSize = input<ZardButtonSizeVariants>('default');
+  readonly zNextButtonText = input<string | undefined>();
 
   protected readonly classes = computed(() => mergeClasses(paginationNextVariants(), this.class()));
 }
@@ -191,6 +193,7 @@ export class ZardPaginationEllipsisComponent {
             [zSize]="zSize()"
             [zDisabled]="zDisabled() || zPageIndex() === 1"
             (click)="goToPage(pagePrevious)"
+            [zPreviousButtonText]="zPreviousButtonText()"
           />
         </li>
 
@@ -219,6 +222,7 @@ export class ZardPaginationEllipsisComponent {
             [zSize]="zSize()"
             [zDisabled]="zDisabled() || zPageIndex() === zTotal()"
             (click)="goToPage(pageNext)"
+            [zNextButtonText]="zNextButtonText()"
           />
         </li>
       </ul>
@@ -241,6 +245,8 @@ export class ZardPaginationComponent {
   readonly zDisabled = input(false, { transform: booleanAttribute });
   readonly zContent = input<TemplateRef<void> | undefined>();
   readonly zAriaLabel = input('Pagination');
+  readonly zPreviousButtonText = input<string>();
+  readonly zNextButtonText = input<string>();
 
   readonly class = input<ClassValue>('');
 
