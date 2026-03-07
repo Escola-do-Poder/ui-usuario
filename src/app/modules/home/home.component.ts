@@ -51,7 +51,7 @@ export class HomeComponent {
     },
     {
       id: generateId('card'),
-      rotaNavegacao: '/usuarios',
+      rotaNavegacao: '/usuarios-perfis',
       tituloCard: 'Usuários e Perfis',
       descricaoCard: 'Controle acessos, perfis e permissões do sistema.',
     },

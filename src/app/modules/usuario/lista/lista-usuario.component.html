@@ -1,87 +1,23 @@
 <div class="w-full p-16">
   <div class="flex justify-between items-center mb-8">
-    <h1 class="text-2xl font-bold"> Usuários </h1>
+    <z-segmented zSize="lg" [zOptions]="opcoes"
+                 [zDefaultValue]="opcaoSelecionada()"
+                 (zChange)="aoMudarOpcaoSelecionada($event)"/>
 
-    <a z-button zType="default" [routerLink]="'/usuarios/novo'">
-      <div z-icon zType="user-plus" zSize="xl"></div>
-      Novo usuário
-    </a>
+    <button type="button" z-button zType="default" [routerLink]="'/usuarios-perfis/novo'">
+      <div z-icon zType="plus" zSize="xl"></div>
+      Novo
+    </button>
   </div>
 
-  <div class="overflow-hidden rounded-md border">
-    <table z-table>
-      <thead z-table-header>
-      <tr z-table-row>
-        <th z-table-head>Nome</th>
-        <th z-table-head>CPF</th>
-        <th z-table-head>RG</th>
-        <th z-table-head class="w-16">Ações</th>
-      </tr>
-      </thead>
-      <tbody z-table-body [class]="httpLoadingService.loading() ? 'mask-b-from-50%' : ''">
-        @for (usuario of usuarios(); track usuario.id) {
-          <tr z-table-row>
-            <td z-table-cell>
-              <div>{{ usuario.nome }}</div>
-            </td>
-            <td z-table-cell>
-              <div>{{ usuario.cpf | cpf }}</div>
-            </td>
-            <td z-table-cell>
-              <div>{{ usuario.rg }}</div>
-            </td>
-            <td z-table-cell>
-              <div class="flex items-center gap-2">
-                <a z-button zType="ghost" [routerLink]="'/usuarios/' + usuario.id" title="Detalhar usuário"
-                   zTooltip="Detalhar usuário">
-                  <div z-icon zType="user-search" zSize="xl"></div>
-                </a>
-                <a z-button zType="ghost" [routerLink]="'/usuarios/' + usuario.id + '/editar'" title="Editar usuário"
-                   zTooltip="Editar usuário">
-                  <div z-icon zType="user-pen" zSize="xl"></div>
-                </a>
-                <a z-button zType="ghost" class="text-destructive" (click)="excluirUsuario(usuario.id)"
-                   title="Deletar usuário"
-                   zTooltip="Deletar usuário">
-                  <div z-icon zType="trash" zSize="xl"></div>
-                </a>
-              </div>
-            </td>
-          </tr>
-        } @empty {
-          @if (httpLoadingService.loading()) {
-            @for (_ of quantidadeSkeletons; track $index) {
-              <tr z-table-row>
-                <td z-table-cell>
-                  <z-skeleton class="w-40 h-5"/>
-                </td>
+  <div class="flex gap-4">
+    @if (opcaoSelecionada() === 'usuarios') {
+      <app-tabela-usuarios/>
+      <app-vinculacoes-rapidas-usuarios/>
+    } @else {
 
-                <td z-table-cell>
-                  <z-skeleton class="w-30 h-5"/>
-                </td>
-
-                <td z-table-cell>
-                  <z-skeleton class="w-20 h-5"/>
-                </td>
-
-                <td z-table-cell>
-                  <div class="flex items-center gap-2">
-                    <z-skeleton class="size-8 rounded-full"/>
-                    <z-skeleton class="size-8 rounded-full"/>
-                    <z-skeleton class="size-8 rounded-full"/>
-                  </div>
-                </td>
-              </tr>
-            }
-          } @else {
-            <tr z-table-row>
-              <td z-table-cell [attr.colspan]="4" class="h-24 text-center">
-                Sem resultados.
-              </td>
-            </tr>
-          }
-        }
-      </tbody>
-    </table>
+    }
   </div>
+
+
 </div>
