@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 
 import type { ClassValue } from 'clsx';
+import { ZardCommandComponent } from '@zard-ui/components/command/command.component';
+import { mergeClasses } from '@zard-ui/utils';
+import { commandEmptyVariants } from '@zard-ui/components/command/command.variants';
 
-import { ZardCommandComponent } from '@/components/command/command.component';
-import { commandEmptyVariants } from '@/components/command/command.variants';
-import { mergeClasses } from '@/utils/merge-classes';
+
 
 @Component({
   selector: 'z-command-empty',

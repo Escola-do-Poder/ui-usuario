@@ -8,13 +8,11 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-
 import type { ClassValue } from 'clsx';
-
-import { ZardCommandOptionComponent } from '@/components/command/command-option.component';
-import { ZardCommandComponent } from '@/components/command/command.component';
-import { commandGroupHeadingVariants, commandGroupVariants } from '@/components/command/command.variants';
-import { mergeClasses } from '@/utils/merge-classes';
+import { ZardCommandOptionComponent } from '@zard-ui/components/command/command-option.component';
+import { ZardCommandComponent } from '@zard-ui/components/command/command.component';
+import { mergeClasses } from '@zard-ui/utils';
+import { commandGroupHeadingVariants, commandGroupVariants } from '@zard-ui/components/command/command.variants';
 
 export abstract class ZardCommandOptionGroup {
   abstract registerOption(option: ZardCommandOptionComponent): void;

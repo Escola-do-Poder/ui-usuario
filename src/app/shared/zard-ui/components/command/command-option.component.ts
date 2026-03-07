@@ -10,18 +10,16 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-
 import type { ClassValue } from 'clsx';
-
-import type { ZardCommandOptionGroupComponent } from '@/components/command/command-option-group.component';
-import { ZardCommandComponent } from '@/components/command/command.component';
+import { ZardIcon, ZardIconComponent } from '@zard-ui/components/icon';
+import { ZardCommandComponent } from '@zard-ui/components/command/command.component';
 import {
   commandItemVariants,
   commandShortcutVariants,
-  type ZardCommandItemVariants,
-} from '@/components/command/command.variants';
-import { ZardIconComponent, type ZardIcon } from '@/components/icon';
-import { mergeClasses } from '@/utils/merge-classes';
+  ZardCommandItemVariants,
+} from '@zard-ui/components/command/command.variants';
+import { ZardCommandOptionGroupComponent } from '@zard-ui/components/command/command-option-group.component';
+import { mergeClasses } from '@zard-ui/utils';
 
 @Component({
   selector: 'z-command-option',

@@ -14,11 +14,10 @@ import {
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import type { ClassValue } from 'clsx';
-
-import { ZardCommandComponent } from '@/components/command/command.component';
-import { commandInputVariants } from '@/components/command/command.variants';
-import { ZardIconComponent } from '@/components/icon';
-import { mergeClasses } from '@/utils/merge-classes';
+import { ZardIconComponent } from '@zard-ui/components/icon';
+import { ZardCommandComponent } from '@zard-ui/components/command/command.component';
+import { mergeClasses } from '@zard-ui/utils';
+import { commandInputVariants } from '@zard-ui/components/command/command.variants';
 
 @Component({
   selector: 'z-command-input',
