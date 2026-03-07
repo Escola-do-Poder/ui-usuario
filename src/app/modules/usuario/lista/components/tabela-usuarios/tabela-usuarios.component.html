@@ -10,63 +10,79 @@
           <th z-table-head class="w-16">Ações</th>
         </tr>
         </thead>
-        <tbody z-table-body [class]="httpLoadingService.loading() ? 'mask-b-from-50%' : ''">
-          @for (usuario of usuarios(); track usuario.id) {
-            <tr z-table-row>
-              <td z-table-cell>
-                <div>{{ usuario.nome }}</div>
-              </td>
-              <td z-table-cell>
-                <div>{{ usuario.cpf | cpf }}</div>
-              </td>
-              <td z-table-cell>
-                <div>{{ usuario.rg }}</div>
-              </td>
-              <td z-table-cell>
-                <div class="flex items-center gap-2">
-                  <a z-button zType="ghost" [routerLink]="'/usuarios-perfis/' + usuario.id" title="Detalhar usuário"
-                     zTooltip="Detalhar usuário">
-                    <div z-icon zType="user-search" zSize="xl"></div>
-                  </a>
-                  <a z-button zType="ghost" [routerLink]="'/usuarios-perfis/' + usuario.id + '/editar'"
-                     title="Editar usuário"
-                     zTooltip="Editar usuário">
-                    <div z-icon zType="user-pen" zSize="xl"></div>
-                  </a>
-                  <a z-button zType="ghost" class="text-destructive" (click)="excluirUsuario(usuario.id)"
-                     title="Deletar usuário"
-                     zTooltip="Deletar usuário">
-                    <div z-icon zType="trash" zSize="xl"></div>
-                  </a>
-                </div>
-              </td>
-            </tr>
-          } @empty {
-            @if (httpLoadingService.loading()) {
-              @for (_ of quantidadeSkeletons; track $index) {
-                <tr z-table-row>
-                  <td z-table-cell>
-                    <z-skeleton class="w-40 h-5"/>
-                  </td>
+        <tbody z-table-body [class]="carregamentoInicial() ? 'mask-b-from-50%' : ''">
+          @if (carregamentoInicial()) {
+            @for (_ of quantidadeSkeletons; track $index) {
+              <tr z-table-row>
+                <td z-table-cell>
+                  <z-skeleton class="w-40 h-5"/>
+                </td>
 
-                  <td z-table-cell>
-                    <z-skeleton class="w-30 h-5"/>
-                  </td>
+                <td z-table-cell>
+                  <z-skeleton class="w-30 h-5"/>
+                </td>
 
-                  <td z-table-cell>
-                    <z-skeleton class="w-20 h-5"/>
-                  </td>
+                <td z-table-cell>
+                  <z-skeleton class="w-20 h-5"/>
+                </td>
 
-                  <td z-table-cell>
-                    <div class="flex items-center gap-2">
-                      <z-skeleton class="size-8 rounded-full"/>
-                      <z-skeleton class="size-8 rounded-full"/>
-                      <z-skeleton class="size-8 rounded-full"/>
-                    </div>
-                  </td>
-                </tr>
-              }
-            } @else {
+                <td z-table-cell>
+                  <div class="flex items-center gap-2">
+                    <z-skeleton class="size-8 rounded-full"/>
+                    <z-skeleton class="size-8 rounded-full"/>
+                    <z-skeleton class="size-8 rounded-full"/>
+                  </div>
+                </td>
+              </tr>
+            }
+          } @else {
+            @for (usuario of usuarios(); track usuario.id) {
+              <tr z-table-row>
+                <td z-table-cell>
+                  <div>{{ usuario.nome }}</div>
+                </td>
+                <td z-table-cell>
+                  <div>{{ usuario.cpf | cpf }}</div>
+                </td>
+                <td z-table-cell>
+                  <div>{{ usuario.rg }}</div>
+                </td>
+                <td z-table-cell>
+                  <div class="flex items-center gap-2">
+                    <a
+                      z-button
+                      zType="ghost"
+                      [routerLink]="'/usuarios-perfis/' + usuario.id"
+                      title="Detalhar usuário"
+                      zTooltip="Detalhar usuário"
+                    >
+                      <div z-icon zType="user-search" zSize="xl"></div>
+                    </a>
+
+                    <a
+                      z-button
+                      zType="ghost"
+                      [routerLink]="'/usuarios-perfis/' + usuario.id + '/editar'"
+                      title="Editar usuário"
+                      zTooltip="Editar usuário"
+                    >
+                      <div z-icon zType="user-pen" zSize="xl"></div>
+                    </a>
+
+                    <a
+                      z-button
+                      zType="ghost"
+                      class="text-destructive"
+                      (click)="excluirUsuario(usuario.id)"
+                      title="Deletar usuário"
+                      zTooltip="Deletar usuário"
+                    >
+                      <div z-icon zType="trash" zSize="xl"></div>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            } @empty {
               <tr z-table-row>
                 <td z-table-cell [attr.colspan]="4" class="h-24 text-center">
                   Sem resultados.
