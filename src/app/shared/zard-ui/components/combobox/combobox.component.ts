@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   afterNextRender,
@@ -55,6 +56,7 @@ export interface ZardComboboxGroup {
   imports: [
     FormsModule,
     NgTemplateOutlet,
+    OverlayModule,
     NgIcon,
     ZardButtonComponent,
     ZardCommandComponent,
