@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 
 import type { ClassValue } from 'clsx';
+
 import { ZardCommandComponent } from '@zard-ui/components/command/command.component';
-import { mergeClasses } from '@zard-ui/utils';
 import { commandSeparatorVariants } from '@zard-ui/components/command/command.variants';
+import { mergeClasses } from '@zard-ui/utils/merge-classes';
 
 @Component({
   selector: 'z-command-divider',

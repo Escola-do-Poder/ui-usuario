@@ -11,13 +11,14 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { type ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import type { ClassValue } from 'clsx';
-import { ZardCommandOptionComponent } from '@zard-ui/components/command/command-option.component';
-import { ZardIcon } from '@zard-ui/components/icon';
-import { ZardCommandInputComponent } from '@zard-ui/components/command/command-input.component';
-import { commandVariants, ZardCommandSizeVariants } from '@zard-ui/components/command/command.variants';
-import { mergeClasses } from '@zard-ui/utils';
 
+import type { IconName } from '@ng-icons/core';
+import type { ClassValue } from 'clsx';
+
+import { ZardCommandInputComponent } from '@zard-ui/components/command/command-input.component';
+import { ZardCommandOptionComponent } from '@zard-ui/components/command/command-option.component';
+import { commandVariants, type ZardCommandSizeVariants } from '@zard-ui/components/command/command.variants';
+import { mergeClasses } from '@zard-ui/utils/merge-classes';
 
 export interface ZardCommandOption {
   value: unknown;
@@ -25,9 +26,9 @@ export interface ZardCommandOption {
   disabled?: boolean;
   command?: string;
   shortcut?: string;
-  icon?: ZardIcon;
+  icon?: IconName;
   action?: () => void;
-  key?: string; // Keyboard shortcut key (e.g., 'n' for Ctrl+N)
+  key?: string;
 }
 
 export interface ZardCommandGroup {

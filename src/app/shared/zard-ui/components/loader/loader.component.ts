@@ -2,13 +2,12 @@ import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation 
 
 import type { ClassValue } from 'clsx';
 
-import { loaderVariants, type ZardLoaderVariants } from './loader.variants';
-
 import { mergeClasses } from '@zard-ui/utils/merge-classes';
+
+import { loaderVariants, type ZardLoaderVariants } from './loader.variants';
 
 @Component({
   selector: 'z-loader',
-  standalone: true,
   template: `
     <div class="relative top-1/2 left-1/2 h-[inherit] w-[inherit]">
       @for (_ of bars; track $index) {

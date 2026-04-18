@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucidePlus } from '@ng-icons/lucide';
 import { ZardButtonComponent } from '@zard-ui/components/button/button.component';
-import { ZardIconComponent } from '@zard-ui/components/icon/icon.component';
-import { ZardTooltipModule } from '@zard-ui/components/tooltip/tooltip';
 import { RouterLink } from '@angular/router';
 import { SegmentedOption, ZardSegmentedComponent } from '@zard-ui/components/segmented';
 import { TabelaUsuariosComponent } from './components/tabela-usuarios/tabela-usuarios.component';
@@ -13,8 +13,7 @@ import {
   selector: 'app-lista-usuario',
   imports: [
     ZardButtonComponent,
-    ZardIconComponent,
-    ZardTooltipModule,
+    NgIcon,
     RouterLink,
     ZardSegmentedComponent,
     TabelaUsuariosComponent,
@@ -23,6 +22,7 @@ import {
   templateUrl: './lista-usuario.component.html',
   styleUrl: './lista-usuario.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [provideIcons({ lucidePlus })],
 })
 export class ListaUsuario {
   public opcoes: SegmentedOption[] = [

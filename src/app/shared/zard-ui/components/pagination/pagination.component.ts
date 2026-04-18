@@ -7,10 +7,12 @@ import {
   input,
   model,
   output,
-  TemplateRef,
+  type TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
 
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideChevronLeft, lucideChevronRight, lucideEllipsis } from '@ng-icons/lucide';
 import type { ClassValue } from 'clsx';
 
 import {
@@ -18,7 +20,6 @@ import {
   type ZardButtonSizeVariants,
   type ZardButtonTypeVariants,
 } from '@zard-ui/components/button';
-import { ZardIconComponent } from '@zard-ui/components/icon';
 import {
   paginationContentVariants,
   paginationEllipsisVariants,
@@ -94,7 +95,7 @@ export class ZardPaginationButtonComponent {
 
 @Component({
   selector: 'z-pagination-previous',
-  imports: [ZardPaginationButtonComponent, ZardIconComponent],
+  imports: [ZardPaginationButtonComponent, NgIcon],
   template: `
     <button
       type="button"
@@ -105,26 +106,26 @@ export class ZardPaginationButtonComponent {
       [zDisabled]="zDisabled()"
     >
       <span class="sr-only">To previous page</span>
-      <z-icon zType="chevron-left" aria-hidden="true" />
-      <span class="hidden sm:block" aria-hidden="true">{{ zPreviousButtonText() ?? 'Previous' }}</span>
+      <ng-icon name="lucideChevronLeft" aria-hidden="true" />
+      <span class="hidden sm:block" aria-hidden="true">Previous</span>
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  viewProviders: [provideIcons({ lucideChevronLeft })],
   exportAs: 'zPaginationPrevious',
 })
 export class ZardPaginationPreviousComponent {
   readonly class = input<ClassValue>('');
   readonly zDisabled = input(false, { transform: booleanAttribute });
   readonly zSize = input<ZardButtonSizeVariants>('default');
-  readonly zPreviousButtonText = input<string | undefined>();
 
   protected readonly classes = computed(() => mergeClasses(paginationPreviousVariants(), this.class()));
 }
 
 @Component({
   selector: 'z-pagination-next',
-  imports: [ZardPaginationButtonComponent, ZardIconComponent],
+  imports: [ZardPaginationButtonComponent, NgIcon],
   template: `
     <button
       type="button"
@@ -135,31 +136,32 @@ export class ZardPaginationPreviousComponent {
       [zSize]="zSize()"
     >
       <span class="sr-only">To next page</span>
-      <span class="hidden sm:block" aria-hidden="true">{{ zNextButtonText() ?? 'Next' }}</span>
-      <z-icon zType="chevron-right" aria-hidden="true" />
+      <span class="hidden sm:block" aria-hidden="true">Next</span>
+      <ng-icon name="lucideChevronRight" aria-hidden="true" />
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  viewProviders: [provideIcons({ lucideChevronRight })],
   exportAs: 'zPaginationNext',
 })
 export class ZardPaginationNextComponent {
   readonly class = input<ClassValue>('');
   readonly zDisabled = input(false, { transform: booleanAttribute });
   readonly zSize = input<ZardButtonSizeVariants>('default');
-  readonly zNextButtonText = input<string | undefined>();
 
   protected readonly classes = computed(() => mergeClasses(paginationNextVariants(), this.class()));
 }
 
 @Component({
   selector: 'z-pagination-ellipsis',
-  imports: [ZardIconComponent],
+  imports: [NgIcon],
   template: `
-    <z-icon zType="ellipsis" aria-hidden="true" />
+    <ng-icon name="lucideEllipsis" aria-hidden="true" />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  viewProviders: [provideIcons({ lucideEllipsis })],
   host: {
     '[class]': 'classes()',
     'aria-hidden': 'true',
@@ -193,7 +195,6 @@ export class ZardPaginationEllipsisComponent {
             [zSize]="zSize()"
             [zDisabled]="zDisabled() || zPageIndex() === 1"
             (click)="goToPage(pagePrevious)"
-            [zPreviousButtonText]="zPreviousButtonText()"
           />
         </li>
 
@@ -222,7 +223,6 @@ export class ZardPaginationEllipsisComponent {
             [zSize]="zSize()"
             [zDisabled]="zDisabled() || zPageIndex() === zTotal()"
             (click)="goToPage(pageNext)"
-            [zNextButtonText]="zNextButtonText()"
           />
         </li>
       </ul>
@@ -245,8 +245,6 @@ export class ZardPaginationComponent {
   readonly zDisabled = input(false, { transform: booleanAttribute });
   readonly zContent = input<TemplateRef<void> | undefined>();
   readonly zAriaLabel = input('Pagination');
-  readonly zPreviousButtonText = input<string>();
-  readonly zNextButtonText = input<string>();
 
   readonly class = input<ClassValue>('');
 

@@ -7,7 +7,13 @@ import {
   type TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
+
+import { NgIcon } from '@ng-icons/core';
 import type { ClassValue } from 'clsx';
+
+import { ZardStringTemplateOutletDirective } from '@zard-ui/core/directives/string-template-outlet/string-template-outlet.directive';
+import { mergeClasses } from '@zard-ui/utils/merge-classes';
+
 import {
   emptyActionsVariants,
   emptyDescriptionVariants,
@@ -17,14 +23,10 @@ import {
   emptyTitleVariants,
   emptyVariants,
 } from './empty.variants';
-import { ZardStringTemplateOutletDirective } from '@zard-ui/core';
-import { ZardIcon, ZardIconComponent } from '@zard-ui/components/icon';
-import { mergeClasses } from '@zard-ui/utils';
-
 
 @Component({
   selector: 'z-empty',
-  imports: [NgOptimizedImage, ZardIconComponent, ZardStringTemplateOutletDirective],
+  imports: [NgOptimizedImage, NgIcon, ZardStringTemplateOutletDirective],
   template: `
     @let image = zImage();
     @let icon = zIcon();
@@ -41,7 +43,7 @@ import { mergeClasses } from '@zard-ui/utils';
         </div>
       } @else if (icon) {
         <div [class]="iconClasses()" data-testid="icon">
-          <z-icon [zType]="icon" zSize="xl" />
+          <ng-icon [name]="icon" class="size-5!" />
         </div>
       }
 
@@ -77,7 +79,7 @@ import { mergeClasses } from '@zard-ui/utils';
 })
 export class ZardEmptyComponent {
   readonly zActions = input<TemplateRef<void>[]>([]);
-  readonly zIcon = input<ZardIcon>();
+  readonly zIcon = input<string>();
   readonly zImage = input<string | TemplateRef<void>>();
   readonly zTitle = input<string | TemplateRef<void>>();
   readonly zDescription = input<string | TemplateRef<void>>();

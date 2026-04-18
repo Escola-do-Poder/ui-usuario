@@ -1,4 +1,4 @@
-import { ZardIcon } from '@zard-ui/components/icon/icons';
+import type { IconName } from '@ng-icons/core';
 
 export interface GrupoNavegacao {
   id: string;
@@ -8,7 +8,7 @@ export interface GrupoNavegacao {
 
 export interface ItemNavegacao {
   id: string;
-  icone: ZardIcon;
+  icone: IconName;
   titulo: string;
   rota?: string;
   submenus?: SubmenuItemNavegacao[];

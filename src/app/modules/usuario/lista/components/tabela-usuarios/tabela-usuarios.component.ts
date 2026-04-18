@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideTrash2, lucideUserPen, lucideUserSearch } from '@ng-icons/lucide';
 import { ZardCardComponent } from '@zard-ui/components/card/card.component';
 import { ZardButtonComponent } from '@zard-ui/components/button/button.component';
 import { ZardPaginationComponent } from '@zard-ui/components/pagination';
 import { CpfPipe } from '@shared/pipes/cpf.pipe';
-import { ZardIconComponent } from '@zard-ui/components/icon';
 import { ZardSkeletonComponent } from '@zard-ui/components/skeleton/skeleton.component';
-import { ZardTooltipDirective } from '@zard-ui/components/tooltip/tooltip';
+import { ZardTooltipImports } from '@zard-ui/components/tooltip';
 import { Usuario } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { toast } from 'ngx-sonner';
@@ -20,15 +21,16 @@ import { rxResource } from '@angular/core/rxjs-interop';
     ZardButtonComponent,
     ZardPaginationComponent,
     CpfPipe,
-    ZardIconComponent,
+    NgIcon,
     ZardSkeletonComponent,
     ZardTableImports,
-    ZardTooltipDirective,
+    ZardTooltipImports,
     RouterLink,
   ],
   templateUrl: './tabela-usuarios.component.html',
   styleUrl: './tabela-usuarios.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [provideIcons({ lucideTrash2, lucideUserPen, lucideUserSearch })],
 })
 export class TabelaUsuariosComponent {
   public quantidadeSkeletons: number[] = Array.from({ length: 4 });

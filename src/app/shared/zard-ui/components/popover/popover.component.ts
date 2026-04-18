@@ -23,9 +23,9 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 import { filter, type Subscription } from 'rxjs';
 
+import { mergeClasses } from '@zard-ui/utils/merge-classes';
 
 import { popoverVariants } from './popover.variants';
-import { mergeClasses } from '@zard-ui/utils';
 
 export type ZardPopoverTrigger = 'click' | 'hover' | null;
 export type ZardPopoverPlacement = 'top' | 'bottom' | 'left' | 'right';

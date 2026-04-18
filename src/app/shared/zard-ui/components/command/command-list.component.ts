@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 
 import type { ClassValue } from 'clsx';
+
 import { commandListVariants } from '@zard-ui/components/command/command.variants';
-import { mergeClasses } from '@zard-ui/utils';
+import { mergeClasses } from '@zard-ui/utils/merge-classes';
 
 @Component({
   selector: 'z-command-list',

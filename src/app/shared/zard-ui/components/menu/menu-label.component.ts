@@ -14,7 +14,7 @@ import { menuLabelVariants } from '@zard-ui/components/menu/menu.variants';
 import { mergeClasses } from '@zard-ui/utils/merge-classes';
 
 @Component({
-  selector: 'z-menu-label, [z-menu-label]',
+  selector: 'z-menu-label, [z-menu-label], z-dropdown-menu-label, [z-dropdown-menu-label]',
   template: `
     <ng-content />
   `,

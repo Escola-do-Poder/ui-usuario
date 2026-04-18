@@ -10,20 +10,22 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+
+import { NgIcon, type IconName } from '@ng-icons/core';
 import type { ClassValue } from 'clsx';
-import { ZardIcon, ZardIconComponent } from '@zard-ui/components/icon';
+
+import type { ZardCommandOptionGroupComponent } from '@zard-ui/components/command/command-option-group.component';
 import { ZardCommandComponent } from '@zard-ui/components/command/command.component';
 import {
   commandItemVariants,
   commandShortcutVariants,
-  ZardCommandItemVariants,
+  type ZardCommandItemVariants,
 } from '@zard-ui/components/command/command.variants';
-import { ZardCommandOptionGroupComponent } from '@zard-ui/components/command/command-option-group.component';
-import { mergeClasses } from '@zard-ui/utils';
+import { mergeClasses } from '@zard-ui/utils/merge-classes';
 
 @Component({
   selector: 'z-command-option',
-  imports: [ZardIconComponent],
+  imports: [NgIcon],
   template: `
     @if (isOptionVisible()) {
       <div
@@ -38,7 +40,7 @@ import { mergeClasses } from '@zard-ui/utils';
         (mouseenter)="onMouseEnter()"
       >
         @if (zIcon()) {
-          <div z-icon [zType]="zIcon()!" class="mr-2 flex shrink-0 items-center justify-center"></div>
+          <ng-icon [name]="zIcon()!" class="mr-2 flex size-4! shrink-0 items-center justify-center" />
         }
         <span class="flex-1">{{ zLabel() }}</span>
         @if (zShortcut()) {
@@ -58,7 +60,7 @@ export class ZardCommandOptionComponent {
   readonly zValue = input.required<unknown>();
   readonly zLabel = input.required<string>();
   readonly zCommand = input<string>('');
-  readonly zIcon = input<ZardIcon>();
+  readonly zIcon = input<IconName>();
   readonly zShortcut = input<string>('');
   readonly zDisabled = input(false, { transform: booleanAttribute });
   readonly variant = input<ZardCommandItemVariants>('default');

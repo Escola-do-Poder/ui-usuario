@@ -3,14 +3,13 @@ import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation 
 import type { ClassValue } from 'clsx';
 import { NgxSonnerToaster } from 'ngx-sonner';
 
-import { toastVariants, type ZardToastVariants } from './toast.variants';
-
 import { mergeClasses } from '@zard-ui/utils/merge-classes';
+
+import { toastVariants, type ZardToastVariants } from './toast.variants';
 
 @Component({
   selector: 'z-toast, z-toaster',
   imports: [NgxSonnerToaster],
-  standalone: true,
   template: `
     <ngx-sonner-toaster
       [theme]="theme()"
@@ -31,7 +30,7 @@ import { mergeClasses } from '@zard-ui/utils/merge-classes';
 })
 export class ZardToastComponent {
   readonly class = input<ClassValue>('');
-  readonly variant = input<ZardToastVariants['variant']>('default');
+  readonly variant = input<ZardToastVariants>('default');
   readonly theme = input<'light' | 'dark' | 'system'>('system');
   readonly position = input<'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'>(
     'bottom-right',

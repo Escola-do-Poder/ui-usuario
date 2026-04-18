@@ -4,10 +4,10 @@ import type { ClassValue } from 'clsx';
 
 import { mergeClasses } from '@zard-ui/utils/merge-classes';
 
-import { badgeVariants, type ZardBadgeShapeVariants, type ZardBadgeTypeVariants } from './badge.variants';
+import { avatarGroupVariants, type ZardAvatarGroupOrientationVariants } from './avatar.variants';
 
 @Component({
-  selector: 'z-badge',
+  selector: 'z-avatar-group',
   template: `
     <ng-content />
   `,
@@ -16,15 +16,13 @@ import { badgeVariants, type ZardBadgeShapeVariants, type ZardBadgeTypeVariants 
   host: {
     '[class]': 'classes()',
   },
-  exportAs: 'zBadge',
+  exportAs: 'zAvatarGroup',
 })
-export class ZardBadgeComponent {
-  readonly zType = input<ZardBadgeTypeVariants>('default');
-  readonly zShape = input<ZardBadgeShapeVariants>('default');
-
+export class ZardAvatarGroupComponent {
+  readonly zOrientation = input<ZardAvatarGroupOrientationVariants>('horizontal');
   readonly class = input<ClassValue>('');
 
   protected readonly classes = computed(() =>
-    mergeClasses(badgeVariants({ zType: this.zType(), zShape: this.zShape() }), this.class()),
+    mergeClasses(avatarGroupVariants({ zOrientation: this.zOrientation() }), this.class()),
   );
 }

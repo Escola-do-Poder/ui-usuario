@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -6,10 +7,12 @@ import {
   input,
   output,
   signal,
-  type TemplateRef,
   ViewEncapsulation,
+  type TemplateRef,
 } from '@angular/core';
 
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import type { ClassValue } from 'clsx';
 
 import {
@@ -18,20 +21,16 @@ import {
   sidebarTriggerVariants,
   sidebarVariants,
 } from '@zard-ui/components/layout/layout.variants';
-import {
-  ZardStringTemplateOutletDirective,
-} from '@zard-ui/core/directives/string-template-outlet/string-template-outlet.directive';
-import { mergeClasses, transform } from '@zard-ui/utils/merge-classes';
-import { ZardIconComponent } from '@zard-ui/components/icon/icon.component';
-import { ZardIcon } from '@zard-ui/components/icon/icons';
+import { ZardStringTemplateOutletDirective } from '@zard-ui/core/directives/string-template-outlet/string-template-outlet.directive';
+import { mergeClasses } from '@zard-ui/utils/merge-classes';
 
 @Component({
   selector: 'z-sidebar',
-  imports: [ZardStringTemplateOutletDirective, ZardIconComponent],
+  imports: [ZardStringTemplateOutletDirective, NgIcon],
   template: `
     <aside [class]="classes()" [style.width.px]="currentWidth()" [attr.data-collapsed]="zCollapsed()">
       <div class="flex-1 overflow-auto">
-        <ng-content/>
+        <ng-content />
       </div>
 
       @if (zCollapsible() && !zTrigger()) {
@@ -44,25 +43,26 @@ import { ZardIcon } from '@zard-ui/components/icon/icons';
           [attr.aria-label]="zCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
           [attr.aria-expanded]="!zCollapsed()"
         >
-          <z-icon [zType]="chevronIcon()"/>
+          <ng-icon [name]="chevronIcon()" class="pointer-events-none size-4! shrink-0" />
         </div>
       }
 
       @if (zCollapsible() && zTrigger()) {
-        <ng-container *zStringTemplateOutlet="zTrigger()"/>
+        <ng-container *zStringTemplateOutlet="zTrigger()" />
       }
     </aside>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  viewProviders: [provideIcons({ lucideChevronRight, lucideChevronLeft })],
   exportAs: 'zSidebar',
 })
 export class SidebarComponent {
   readonly zWidth = input<string | number>(200);
   readonly zCollapsedWidth = input<number>(64);
-  readonly zCollapsible = input(false, { transform });
-  readonly zCollapsed = input(false, { transform });
-  readonly zReverseArrow = input(false, { transform });
+  readonly zCollapsible = input(false, { transform: booleanAttribute });
+  readonly zCollapsed = input(false, { transform: booleanAttribute });
+  readonly zReverseArrow = input(false, { transform: booleanAttribute });
   readonly zTrigger = input<TemplateRef<void> | null>(null);
   readonly class = input<ClassValue>('');
 
@@ -86,14 +86,15 @@ export class SidebarComponent {
     return typeof width === 'number' ? width : parseInt(width, 10);
   });
 
-  protected readonly chevronIcon = computed((): ZardIcon => {
+  protected readonly chevronIcon = computed((): string => {
     const collapsed = this.zCollapsed();
     const reverse = this.zReverseArrow();
+    const icons = ['lucideChevronLeft', 'lucideChevronRight'];
 
     if (reverse) {
-      return collapsed ? 'chevron-left' : 'chevron-right';
+      return collapsed ? icons[0] : icons[1];
     }
-    return collapsed ? 'chevron-right' : 'chevron-left';
+    return collapsed ? icons[1] : icons[0];
   });
 
   protected readonly classes = computed(() => mergeClasses(sidebarVariants(), this.class()));
@@ -111,7 +112,7 @@ export class SidebarComponent {
   selector: 'z-sidebar-group',
   template: `
     <div [class]="classes()">
-      <ng-content/>
+      <ng-content />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -128,7 +129,7 @@ export class SidebarGroupComponent {
   selector: 'z-sidebar-group-label',
   template: `
     <div [class]="classes()">
-      <ng-content/>
+      <ng-content />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

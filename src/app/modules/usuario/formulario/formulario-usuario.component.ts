@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, effect, inject, input, OnInit, output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ZardFormModule } from '@zard-ui/components/form/form.module';
 import { ZardInputDirective } from '@zard-ui/components/input/input.directive';
 import { ZardButtonComponent } from '@zard-ui/components/button/button.component';
 import { ModoFormulario } from '../../../core/types/modo-formulario.type';
 import { Usuario } from '../models/usuario';
+import {ZardFormImports} from '@zard-ui/components/form';
 
 @Component({
   selector: 'app-formulario-usuario',
@@ -12,7 +12,7 @@ import { Usuario } from '../models/usuario';
     ReactiveFormsModule,
     ZardButtonComponent,
     ZardInputDirective,
-    ZardFormModule,
+    ZardFormImports
   ],
   templateUrl: './formulario-usuario.component.html',
   styleUrl: './formulario-usuario.component.css',
