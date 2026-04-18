@@ -6,3 +6,5 @@ export interface Usuario {
   cpf: string;
   rg: string;
 }
+
+export type UsuarioSimplificado = Pick<Usuario, 'id' | 'nome'>;

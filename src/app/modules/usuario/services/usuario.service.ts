@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Usuario } from '../models/usuario';
+import { Usuario, UsuarioSimplificado } from '../models/usuario';
 import { FormGroup } from '@angular/forms';
+import { HTTP_ERROR_TOAST } from '../../../core/http/http-error.interceptor';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +23,15 @@ export class UsuarioService {
     return this._http.get<Usuario[]>(this._urlEndpoint, { headers: { 'ngrok-skip-browser-warning': '1' } });
   }
 
+  public listarUsuariosSimplificado(): Observable<UsuarioSimplificado[]> {
+    return this._http.get<UsuarioSimplificado[]>(`${ this._urlEndpoint }/simplificado`, {
+      headers: { 'ngrok-skip-browser-warning': '1' },
+      context: new HttpContext().set(HTTP_ERROR_TOAST, false),
+    });
+  }
+
   public buscarUsuario(id: number): Observable<Usuario> {
-    return this._http.get<Usuario>(this._urlEndpoint + `/${ id }`, { headers: { 'ngrok-skip-browser-warning': '1' } });
+    return this._http.get<Usuario>(`${ this._urlEndpoint }/${ id }`, { headers: { 'ngrok-skip-browser-warning': '1' } });
   }
 
   public salvarUsuario(formulario: FormGroup | FormData): Observable<Usuario> {
@@ -31,10 +39,10 @@ export class UsuarioService {
   }
 
   public editarUsuario(id: number, formulario: FormGroup | FormData): Observable<Usuario> {
-    return this._http.put<Usuario>(this._urlEndpoint + `/${ id }`, formulario, { headers: { 'ngrok-skip-browser-warning': '1' } });
+    return this._http.put<Usuario>(`${ this._urlEndpoint }/${ id }`, formulario, { headers: { 'ngrok-skip-browser-warning': '1' } });
   }
 
   public deletarUsuario(id: number): Observable<Usuario> {
-    return this._http.delete<Usuario>(this._urlEndpoint + `/${ id }`, { headers: { 'ngrok-skip-browser-warning': '1' } });
+    return this._http.delete<Usuario>(`${ this._urlEndpoint }/${ id }`, { headers: { 'ngrok-skip-browser-warning': '1' } });
   }
 }
